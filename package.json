@@ -1,0 +1,19 @@
+{
+  "name": "curso-practico-apirest",
+  "version": "1.0.0",
+  "description": "Proyecto del Curso Practico de APIREST con Javascript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bernidl/The-Moovie-db.git"
+  },
+  "author": "@bernidl :)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bernidl/The-Moovie-db/issues"
+  },
+  "homepage": "https://github.com/bernidl/The-Moovie-db#readme"
+}
