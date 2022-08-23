@@ -5,7 +5,7 @@ trendingBtn.addEventListener('click', () => {
     location.hash = '#trends';
 });
 arrowBtn.addEventListener('click', () => {
-    history.back();
+    location.hash = '#home';
 })
 
 
