@@ -28,9 +28,13 @@
 html {
   background-color: var(--purple-medium-3);
   font-size: 62.5%;
+  display: flex;
+  justify-content: center;
 }
 
 body {
+  min-width: 320px;
+  max-width: 768px;
   background-color: var(--purple-light-1);
   color: var(--purple-dark-2);
   font-family: var(--font-family-text);
@@ -346,13 +350,21 @@ button {
 footer {
   background-color: var(--purple-medium-3);
   color: var(--purple-light-2);
-  text-align: center;
-  height: 48px;
+  height: 100px;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+footer ul {
+  text-align: center;
+  list-style: none;
+}
+footer ul li a {
+  text-decoration: none;
+  color: var(--purple-light-2);
+}
 
 /* Navigation */
 .inactive {
