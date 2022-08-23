@@ -7,6 +7,9 @@ trendingBtn.addEventListener('click', () => {
 arrowBtn.addEventListener('click', () => {
     history.back();
 })
+// headerTitle.addEventListener('click', ()=> {
+//     location.hash = '#home';
+// })
 
 
 window.addEventListener('DOMContentLoaded', navigator, false);
@@ -72,6 +75,7 @@ function categoriesPage() {
     const [_, categoryData] = location.hash.split('='); //=> ['#category', 'id-name']
     const [categoryId, categoryName] = categoryData.split('-');
 
+    headerSection.style.background= '';
     headerCategoryTitle.innerHTML= categoryName;
 
     getMoviesByCategory(categoryId);
