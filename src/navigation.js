@@ -1,11 +1,11 @@
 searchFormBtn.addEventListener('click', () => {
-    location.hash = '#search=';
+    location.hash = '#search=' + searchFormInput.value;
 });
 trendingBtn.addEventListener('click', () => {
     location.hash = '#trends';
 });
 arrowBtn.addEventListener('click', () => {
-    location.hash = '#home';
+    location.hash = window.history.back();
 })
 
 
@@ -82,7 +82,7 @@ function searchPage() {
     headerSection.getElementsByClassName.background = '';
     arrowBtn.classList.remove('inactive');
     arrowBtn.classList.remove('header-arrow--white');
-    headerCategoryTitle.classList.remove('inactive');
+    headerCategoryTitle.classList.add('inactive');
     headerTitle.classList.add('inactive');
     searchForm.classList.remove('inactive');
 
@@ -90,6 +90,9 @@ function searchPage() {
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+
+    const [_, query] = location.hash.split('='); //=> ['#search', 'buscador']
+    getMoviesBySearch(query);
 }
 function movieDetailsPage() {
     console.log('Movie!!');
