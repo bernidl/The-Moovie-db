@@ -38,11 +38,16 @@ function createMovies(movies, container, lazyLoad = false) {
       lazyLoad ? 'data-img' : 'src',
       'https://image.tmdb.org/t/p/w300' + movie.poster_path,
     );
+    movieImg.addEventListener('error',()=>{
+      movieImg.setAttribute(
+        'src',
+        'https://static.platzi.com/static/images/error/img404.png',
+      );
+    })
 
     if(lazyLoad) {
       lazyLoader.observe(movieImg);
     }
-
     movieContainer.appendChild(movieImg);
     container.appendChild(movieContainer);
   });
@@ -59,6 +64,7 @@ function createCategories(categories, container){
     categoryTitle.addEventListener('click', () => {
       location.hash = `#category=${category.id}-${category.name}`;
     });
+    
     const categoryTitleText = document.createTextNode(category.name);
 
     categoryTitle.appendChild(categoryTitleText);
@@ -93,7 +99,7 @@ async function getMoviesByCategory(id) {
 
   const movies = data.results;
 
-  createMovies(movies, genericSection);
+  createMovies(movies, genericSection, true);
 }
 async function getMoviesBySearch(query) {
   const {data} = await api('search/movie', {
