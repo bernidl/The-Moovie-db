@@ -110,28 +110,40 @@ async function getMoviesByCategory(id) {
 
   createMovies(movies, genericSection);
 }
-async function getMoviesBySearch(query) {
-  const {data} = await api('search/movie', {
-    params: {
+async function getMoviesBySearch(query){
+  const{data}=await api('search/movie',{
+    params:{
       query,
     },
   });
-
-  const movies = data.results;
-
-  createMovies(movies, genericSection);
+  const movies=data.results;maxPage=data.total_pages;
+  createMovies(movies,genericSection);
 }
+function getPaginatedMoviesBySearch(query){
+    return async function(){
+      const{
+        scrollTop,
+        scrollHeight,
+        clientHeight
+      }=document.documentElement;
+      const scrollIsBottom=(scrollTop+clientHeight)>=(scrollHeight-15);
+      const pageIsNotMax=page<maxPage;
+      if(scrollIsBottom&&pageIsNotMax){
+        page++;
+        const{ data } = await api('search/movie',{
+          params:{
+            query,
+            page,
+          },
+        });
+        const movies=data.results;createMovies(movies,genericSection,{lazyLoad:true,clean:false},);
+      }}}
 async function getTrendingMovies() {
   const {data} = await api('trending/movie/day');
-
   const movies = data.results;
+  maxPage = data.total_pages;
 
   createMovies(movies, genericSection, {lazyLoad: true, clean: true});
-  
-  // const btnLoadMore = document.createElement('button');
-  // btnLoadMore.innerText = 'Cargar mas';
-  // btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
-  // genericSection.appendChild(btnLoadMore);
 }
 
 async function getPaginatedTrendingMovies(){
@@ -142,8 +154,8 @@ async function getPaginatedTrendingMovies(){
   } = document.documentElement;
 
   const scrollIsBottom =(scrollTop + clientHeight) >= (scrollHeight -15);
-
-  if(scrollIsBottom) {
+  const pageIsNotMax = page < maxPage;
+  if(scrollIsBottom && pageIsNotMax) {
       page++;
       const {data} = await api('trending/movie/day', {
       params: {
@@ -155,10 +167,6 @@ async function getPaginatedTrendingMovies(){
 
     createMovies(movies, genericSection, {lazyLoad: true, clean: false});
   }
-  // const btnLoadMore = document.createElement('button');
-  // btnLoadMore.innerText = 'Cargar mas';
-  // btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
-  // genericSection.appendChild(btnLoadMore);
 }
 async function getMovieById(id) {
   const {data: movie} = await api('movie/' + id);

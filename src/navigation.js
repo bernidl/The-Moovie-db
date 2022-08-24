@@ -1,3 +1,4 @@
+let maxPage;
 let page = 1;
 let infinitScroll;
 
@@ -111,6 +112,8 @@ function searchPage() {
 
     const [_, query] = location.hash.split('='); //=> ['#search', 'buscador']
     getMoviesBySearch(query);
+
+    infinitScroll = getPaginatedMoviesBySearch(query);
 }
 function movieDetailsPage() {
     console.log('Movie!!');
