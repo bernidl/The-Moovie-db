@@ -93,6 +93,8 @@ function categoriesPage() {
     headerCategoryTitle.innerHTML= categoryName;
 
     getMoviesByCategory(categoryId);
+
+    infinitScroll = getPaginatedMoviesByCategory(categoryId);
 }
 function searchPage() {
     console.log('Search!!');
